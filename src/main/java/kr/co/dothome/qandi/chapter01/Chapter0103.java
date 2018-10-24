@@ -6,7 +6,7 @@
  */
 package kr.co.dothome.qandi.chapter01;
 
-public class Test03 {
+public class Chapter0103 {
 
 	public static void main(String[] args) {
 		/*--------------------------------------------------------------

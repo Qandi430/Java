@@ -30,7 +30,7 @@ package kr.co.dothome.qandi.chapter01;
  * @author Qandi
  *
  */
-public class Test01 {
+public class Chapter0101 {
 
 	public static void main(String[] args) {
 		
