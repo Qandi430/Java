@@ -11,4 +11,4 @@ Chapter02 연산자
   - Chapter0202 : 연산의 방향과 
   - Chpater0203 : 단항 연산자
   - Chapter0204 : 이항 연산자
-  - Chapter0205 : 삼항 
+  - Chapter0205 : 삼항 연산자
