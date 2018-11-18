@@ -64,5 +64,197 @@ public class Chapter0204 {
 
 		 double result2 = (double)v1/v2;
 		 System.out.println("result :"+ result2); // 출력값 = 2.5
+		 
+		 //char 타입 연산
+		 //char 타입 연산후에는 int 타입으로 변화
+		 char c1 = 'A'+1;
+		 char c2 = 'A';
+		 //char c3 = c2+1;// 컴파일 에러
+		 char c3 = (char) (c2+1); //char타입으로 캐스팅 필요
+		 System.out.println(c1); //출력값 B
+		 System.out.println(c2); //출력값 A
+		 System.out.println(c3); //출력값 B
+		 
+		 //오버플로우 탐지
+		 //산술연산후 산출값이 해당 산출타입으로 표현할수 있는 값이 넘을경우 오버플로우가 발생하고 쓰레기값(엉뚱한 값이 나온다.)
+		 int o1 = 1000000;
+		 int o2 = 1000000;
+		 int o3 = o1*o2;
+		 long o4 = o1+o2;
+		 System.out.println(o3); //출력값 -727379968
+		 System.out.println(o4); //출력값 2000000 //long타입으로 변환했기 때문
+		 
+		 //정확한 계산은 정수사용
+		 int apple = 1;
+		 double pieceUnit = 0.1;
+		 int number = 7;
+		 double resultApple = apple - number*pieceUnit;
+		 System.out.println( resultApple); //출력값 0.29999999999999993 부동소수점 타입(float, double)은 정확한 0.1을 처리할수 없어서 근사치로 값을 냄
+		 
+		 int apple2 = 1;
+		 int totalPiece = apple2 * 10;
+		 int number2 = 7;
+		 int temp = totalPiece - number2;
+		 double resultApple2 = temp / 10.0;
+		 System.out.println(resultApple2); //출력값 0.3 //정확한 값을 위하여 정수연산으로 변경
+		 
+		 /*
+		  *		NaN과 infinity 연산
+		  *		/ 또는 %연산을 사용할때의 주의점
+		  *     정수타입을 0으로나눌때 ArithmeticException 발생
+		  *     그러나 실수타입은 0.0 또는 0.0f로 나누면 Infinity 또는 NaN(Not a Number) 가 발생 
+		  */
+		 
+		 int x= 5;
+		 double y = 0.0;
+		 
+		 double infinity= x/y;
+		 double nan= x%y;
+		 System.out.println(infinity); //infinity
+		 System.out.println(nan); //NaN
+		 
+		 //	입력값의 NaN 검사
+		 // 연산의 결과가 Infinity 또는 NaN이면 다음연산의 실행을 못하도록 처리
+		 if(Double.isInfinite(infinity)||Double.isNaN(infinity)) {
+			 System.out.println("값 산출불가");
+		 }else {
+			 System.out.println(infinity);
+		 }
+		 
+		 
+		 
+		/*------------------------------------------------------------------------------------------------------------
+		 * 	Chapter02-04-02 	문자열 연결 연산자
+		 ------------------------------------------------------------------------------------------------------------*/
+		 
+		 String str1 = "JDK"+6.0;
+		 String str2 = str1 + " 특징";
+		 System.out.println(str2); //JDK6.0 특징 문자열연결
+		 
+		 String str3 = "JDK" + 3 + 3.0;
+		 String str4 = 3+3.0+"JDK";
+		 
+		 System.out.println(str3); //JDK33.0 //연산 순서에 의해 문자열과 더한 정수,실수는 문자열로 취급
+		 System.out.println(str4); //6.0JDK //연산순서에 의해 앞의 정수와 실수가 더해진후 문자열과 연산
+		 
+		 
+		 /*------------------------------------------------------------------------------------------------------------
+		  * 	Chapter02-04-03 	비교 연산자(<,<=,>,>=,==,!=)
+		  * 	비교 연산자 : 대소(<,<=>,>=) 또는 동등(==,!=)을 비교하여 boolean 타입의 true/false를 리턴
+		  * 	조건문(if)과 반복문(for,while)에서 쥬로 이용
+		  * 	
+		  * 	구분			연산식		설명
+		  * 	-----------------------------------------------------------------------------------
+		  * 	동등 비교		==			두 피연산자의 값이 같은지를 검사
+		  * 				-----------------------------------------------------------------------	
+		  * 					!=			두 피연사자의 값이 다른지를 검사
+		  * 	-----------------------------------------------------------------------------------
+		  * 	크기비교		>			왼쪽의 값이 큰지를 검사
+		  * 				-----------------------------------------------------------------------	
+		  * 					>=			왼쪽의 값이 크거나 같은지를 검사
+		  * 				-----------------------------------------------------------------------	
+		  * 					<			왼쪽의 값이 작은지를 검사
+		  * 				-----------------------------------------------------------------------	
+		  * 					<=			왼쪽의 값이 작거나 같은지를 검사
+		 ------------------------------------------------------------------------------------------------------------*/
+		 int no1 = 10;
+		 int no2 = 10;
+		 
+		 boolean comparison1 = (no1 == no2);  
+		 boolean comparison2 = (no1 != no2); 
+		 
+		 boolean comparison3 = (no1 <= no2);
+		 boolean comparison4 = (no1 < no2);
+		 boolean comparison5 = (no1 > no2);
+		 boolean comparison6 = (no1 >= no2);
+		 
+		 System.out.println("no1 == no2 : "+comparison1); //true	
+		 System.out.println("no1 != no2 : "+comparison2); //false
+		 System.out.println("no1 <= no2 : "+comparison3); //true
+		 System.out.println("no1 < no2 : "+comparison4); //false
+		 System.out.println("no1 > no2 : "+comparison5); //false
+		 System.out.println("no1 >= no2 : "+comparison6); //true
+		 
+		 char ch1 = 'A';
+		 char ch2 = 'B';
+		 
+		 boolean comparison7 = (ch1 <ch2);
+		 System.out.println("A < B : "+comparison7); // true char타입비교는 유니코드로 변환후 비교
+		 
+		 boolean comparison8 = ('A' == 65);
+		 boolean comparison9 = (3==3.0);
+		 
+		 System.out.println("'A'==65 : "+comparison8); // true 비교시 인트로 변환후 비교하므로 true값을 산출
+		 System.out.println("3==3.0 : "+comparison9); // true 비교시 double로 변환후 비교하므로 true값을 산출
+		 
+		 boolean comparison10 = (0.1==0.1f);
+		 System.out.println("0.1==0.1f : "+comparison10); //false 
+		 
+		 //String 비교
+		 // String 타입 비교시에는 String 객체의 번지값이 같은지 확인
+		 // 문자열이 같아도 객체의 주소가 다를시에는 false 반환
+		 
+		 String st1 = "a";
+		 String st2 = "a";
+		 String st3 = new String("a");
+		 
+		 boolean comparison11 = st1==st2;
+		 boolean comparison12 = st1==st3;
+		 
+		 System.out.println("st1 == st2 : "+comparison11); //true	같은 주소값을 참조
+		 System.out.println("st1 == st3 : "+comparison12); // false	새로운객체 생성했으므로 다른 주소값 참조
+		 
+		 
+		 
+		 /*------------------------------------------------------------------------------------------------------------
+		  * 	Chapter02-04-03 	논리 연산자(&&,||,&,|,^,!)
+		  * 
+		  * 	구분			연산식								설명
+		  * 	--------------------------------------------------------------------------------------------------------
+		  * 	AND				true	&&		true	=	true	피연산자가 모두가 true일 경우에만 연산결과 true	
+		  *     (논리 곱)		------			------------------
+		  *     				true	또는	false	=	false
+		  *     				------			------------------	
+		  *     				false	&		true	=	false	
+		  *     				------			------------------
+		  *     				false			false	= 	false
+		  *     --------------------------------------------------------------------------------------------------------
+		  *     OR				true	||		true 	= 	true	피 연산자중 하나라도 true일 경우에 연산결과 true
+		  *     (논리 합)		------			------------------
+		  *     				true	또는	false 	=	true
+		  *     				------			------------------
+		  *     				false	| 		true 	= 	true
+		  *     				------			------------------
+		  *     				false			false 	= 	false	
+		  *     --------------------------------------------------------------------------------------------------------
+		  *     XOR				true	^		true 	= 	false	피 연산자가 하나는 true 하나는 false 일때 true 산출
+		  *     (베타적			------			------------------	
+		  *     논리 합)		true			false 	=	true
+		  *     				------			------------------
+		  *     				false 			true 	= 	true
+		  *     				------			------------------
+		  *     				false			false 	= 	false	
+		  *     --------------------------------------------------------------------------------------------------------
+		  *     --------------------------------------------------------------------------------------------------------
+		  *     NOT					 		!	true 	= 	false	피연산자의 논리값을 바꿈(피연산자 하나만필요)
+		  *     (논리부정)		------			------------------
+		  *     								false 	= 	true	
+		  *     --------------------------------------------------------------------------------------------------------    
+		  *     
+		  *     &&,||와 &,|는 산출 결과는 같지만 연산과정이 다르다
+		  *     &&는 앞의 피연산자가 false라면 뒤의 피연산자는 평가하지 않고 바로 false를 산출
+		  *     모두 true일경우 true이기때문에 뒤의 연산자는 비교하지 않음
+		  *     &&연산자가	더욱 효율적
+		  *     
+		  *     ||는 | 앞의 피연산자가 true일경우 뒤의 피연산자는 평가하지 않음
+		  *     하나만 true일 경우 모두 true이기 때문
+		 ------------------------------------------------------------------------------------------------------------*/
+		 
+		 
+		 /*------------------------------------------------------------------------------------------------------------
+			 * 	Chapter02-04-05 	비트연산자 (&,|,^,~,<<,>>,>>>)
+			 * 	
+			 * 	나중에 서술하겠음
+			 ------------------------------------------------------------------------------------------------------------*/
 	}
 }
