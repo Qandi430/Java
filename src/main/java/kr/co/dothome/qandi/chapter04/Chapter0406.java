@@ -152,8 +152,159 @@ public class Chapter0406 {
 		 * 	배열의 length 필드는 for문을 사용해서 배열 전체를 루필할 때 매우 유용하게 사용할 수 있다.
 		 ---------------------------------------------------------------------------------------*/
 		
+		int[] arr4 = {1,2,3,4};
+		System.out.println(arr4.length); // 4
+		for(int i = 0 ; i<arr4.length; i++) {
+			System.out.println(arr4[i]);
+		}
 		
+		/*
+		 * for문의 조건식에서 < 연산자를 사용한 이유는 배열의 마지막 인덱스는 배열길이보다 1이 적기 때문.
+		 * 배열의 인덱스 범위는 0~(길이 - 1) 이다.
+		 * 만약 인덱스를 초과해서 사용하면 ArrayIndexOutOfBoundsException이 발생한다.
+		 */
 		
+		/*----------------------------------------------------------------------------------------------
+		 * 	Chapter04-06-06		커맨드 라인 입력
+		 * 	
+		 * 	main() 메소드의 메개값인 String[] args의 필요성
+		 * 	"Java 클래스"로 프로그램을 실행하면 JVM은 길이가 0인 배열을 먼저 생성하고 main()메서드를 호출할 때 매개값으로 전달한다.
+		 * 	
+		 * 	메뉴 > Run > Run Configurations > Main > Arguments > Program arguments 에서 관리가 가능 
+		 ---------------------------------------------------------------------------------------------*/
+		
+		/*----------------------------------------------------------------------------------------------
+		 * 	Chapter04-06-07		다차원 배열
+		 *
+		 * 	다차원 배열이란 배열안에 또다른 배열을 참조하는 형식
+		 * 
+		 * 	2차원 배열
+		 * 	2차원 배열은 수학의 행렬을 떠올리면 되는데 가로 인덱스와 세로인덱스를 사용한다.
+		 * 	자바는 2차원 배열을 정첩 배열방식으로 구현 2(행) x 3(열) 행렬을 만들기위해 다음과 같은 코드를 사용한다.
+		 * 	int[][] scores = new int[2][3];
+		 * 	
+		 * 	배열변수인 scores는 길이 2인 배열 A를 참조
+		 * 	배열 A의 scores[0]은 다시 길이 3인 배열 B를 참조한다.
+		 * 	배열 A의 scores[1]은 다시 길이 3인 배열 C를 참조한다.
+		 * 	
+		 * 	자바는 일차원 배열이 서로 연결된 구조로 다차원 배열을 구현하기 때문에 수학 행렬 구조가 아닌 계단식 구조를 가질 수 있다.
+		 * 
+		 * 	int[][] scores = new int[2][];
+		 * 	socres[0] = new int[2];
+		 * 	scores[1] = new int[3];
+		 ---------------------------------------------------------------------------------------------*/
+		
+		int[][] mathScores = new int[2][3];
+		
+		for(int i = 0; i<mathScores.length; i++) {
+			for(int k = 0; k<mathScores[i].length; k++) {
+				System.out.println("mathScores["+i+"]["+k+"]="+mathScores[i][k]);
+			}
+		}
+		System.out.println();
+		
+		int[][] englishScores = new int[2][];
+		englishScores[0] = new int[2];
+		englishScores[1] = new int[3];
+	
+		for(int i = 0; i<englishScores.length; i++) {
+			for(int k = 0; k<englishScores[i].length; k++) {
+				System.out.println("englishScores["+i+"]["+k+"]="+englishScores[i][k]);
+			}
+		}
+		System.out.println();
+		
+		int[][] javaScores = {{95, 80},{92, 96, 80}};
+		for(int i = 0; i<javaScores.length; i++) {
+			for(int k = 0; k<javaScores[i].length; k++) {
+				System.out.println("javaScores["+i+"]["+k+"]="+javaScores[i][k]);
+			}
+		}
+		
+		/*----------------------------------------------------------------------------------------------
+		 * 	Chapter04-06-08		객체를 참조하는 배열
+		 * 
+		 * 	기본 타입(byte, char, short, int, float, double, boolean) 배열은 각 항목에 직접 값을 갖고 있지만, 
+		 * 	참조 타입(클래스, 인터페이스) 배열은 각 항목에 객체의 번지를 가지고 있다.
+		 *	
+		 *	예를 들어 String은 클래스 타입으므로 String[] 배열은 각 항목에 문자열이 아니라 
+		 *	String객체의 주소를 가지고 있다. 즉 String 객체를 참조한다.
+		 ---------------------------------------------------------------------------------------------*/
+		String[] strArray = new String[3];
+		strArray[0] = "Java";
+		strArray[1] = "Java";
+		strArray[2] = new String("Java");
+		
+		System.out.println( strArray[0] == strArray[1]);	//true 같은 주소를 참조
+		System.out.println( strArray[0] == strArray[2]);	//false 다른 주소를 참조
+		System.out.println( strArray[0].equals(strArray[2]) );	//true 문자열이 같음
+		
+		/*----------------------------------------------------------------------------------------------
+		 * 	Chapter04-06-09		배열 복사
+		 * 	
+		 * 	배열은 한 번 생성하면 크기를 변경할 수 없기 때문에 더 많은 저장 공간이 필요하다면 
+		 * 	보다 큰 배열을 새로 만들고 이전 배열로부터 항목값들을 복사해야한다.
+		 * 	배열 간의 항목 값들을 복사하려면 for문을 사용하거나 System.arrayCopy()메소드를 사용하면 된다.
+		 * 
+		 * 	System.arrayCopy() 메소드를 호출하는 방법
+		 * 	System.arrayCopy(Object src, int srcPos, Object dest, int destPos, int length);
+		 * 	src 매개값은 원본배열이고, srcPos는 원본 배열에서 복사할 항목의 시작인덱스이다.
+		 * 	dest 매개값은 새 배열이고, destPos는 새 배열에서 붙여넣을 시작 인덱스. 
+		 * 	length는 복사할 개수이다.
+		 ---------------------------------------------------------------------------------------------*/
+		
+		//for문 사용 배열 복사
+		int[] oldIntArray = {1,2,3};
+		int[] newIntArray = new int[5];
+		
+		for(int i = 0; i<oldIntArray.length; i++) {
+			newIntArray[i] = oldIntArray[i];
+		}
+		System.out.printf("\nnewIntArray = ");
+		for(int a : newIntArray) {
+			System.out.printf("%d,",a);
+		}
+		
+		//System.arrayCopy()메소드 사용 배열 복사
+		String[] oldStrArray = {"java","array","copy"};
+		String[] newStrArray = new String[5];
+		System.arraycopy(oldStrArray, 0, newStrArray, 0, oldStrArray.length);
+		
+		System.out.printf("\nnewStrArray = ");
+		for(String a : newStrArray) {
+			System.out.printf("%s,",a);
+		}
+		System.out.println();
+		/*
+		 *	참조타입 배열일 경우, 배열 복사가 되면 복사되는 값이 객체의 번지이므로 새배열의 항목은 이전 배열의 항목이 참조하는 객체와 동일하다
+		 *	이것을 얕은 복사(shallow copy)라고 한다. 반대로 깊은 복사(deep copy)는 참조하는 객체도 별도로 생성하는 것을 말한다. 
+		 */
+		
+		/*----------------------------------------------------------------------------------------------
+		 * 	Chapter04-06-10		향상된 for 문
+		 * 	
+		 * 	향상된 for문은 반복 실행을 하기 위해 카운터 변수와 증감식을 사용하지 않는다. 
+		 * 	배열 및 컬렉션 항목의 개수만큼 반복하고, 자동적으로 for문을 빠져나간다.
+		 * 
+		 * 	for( ②타입 변수: ①배열){
+		 * 		③ 실행문;	
+		 * 	}
+		 * 
+		 * 	for문이 처음 실행될 때 ①배열에서 가져올 첫번째 값이 존재하는지 평가
+		 * 	가져올 값이 존재하면 해당 값을 ②변수에 저장한다. 그리고 ③실행문을 실행한다.
+		 * 	블록 내부의 ③실행문이 모두 실행됨녀 다시 루프를 돌아 ①배열에서 가져올 다음 값이 존재하는지 형가한다.
+		 * 	가져올 항목이 존재하면 ② -> ③ -> ①로 다시 진행하고, 가져올 다음 항목이 없으면 for문이 종료된다.
+		 ---------------------------------------------------------------------------------------------*/
+		int score[] = {95, 71, 84, 93, 87};
+		
+		int sum = 0;
+		for(int s:score) {
+			sum = sum+s;
+		}
+		System.out.println("점수 총합 = "+sum);
+		
+		double avg = (double)sum/score.length;
+		System.out.println("점수 평균 = "+avg);
 	}
 	
 	public static int add(int[] scores) {
